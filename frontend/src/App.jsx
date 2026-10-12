@@ -1,8 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 
 export default function App() {
   return (
@@ -11,7 +13,10 @@ export default function App() {
       <Route path="/register" element={<Register />} />
 
       <Route element={<ProtectedRoute />}>
-        <Route path="/projects" element={<Projects />} />
+        <Route element={<Layout />}>
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:projectId" element={<ProjectDetail />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<Navigate to="/projects" replace />} />
